@@ -116,6 +116,12 @@ public class BinarySearchTree {
         return t;
     }
 
+    /**
+     * 返回新树根
+     * @param value
+     * @param t
+     * @return
+     */
     private BinaryNode remove(int value, BinaryNode t) {
         if (t == null) {
             return null;
@@ -128,7 +134,7 @@ public class BinarySearchTree {
             // 两个子节点
         } else if (t.left != null && t.right != null) {
 
-            // 右子树最小节点替换被删节点
+            // 右子树最小节点替换被删节点，并删除这个最小节点
             t.data = findMin(t.right).data;
             t.right = remove(t.data, t.right);
             // 一个子节点
