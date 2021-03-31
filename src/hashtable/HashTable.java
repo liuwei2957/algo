@@ -65,7 +65,19 @@ public class HashTable {
     }
 
     private void rehash() {
+        List<Integer>[] old = arr;
+        arr = new LinkedList[2 * old.length];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = new LinkedList<>();
+        }
 
+        // 计算器重置
+        size = 0;
+        for (int i = 0; i < old.length; i++) {
+            for (Integer e : old[i]) {
+                insert(e);
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -76,7 +88,7 @@ public class HashTable {
         table.insert(4);
         table.insert(5);
         table.insert(6);
-        table.insert(7);
+//        table.insert(7);
         table.traverse();
     }
 }

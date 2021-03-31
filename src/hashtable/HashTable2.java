@@ -22,7 +22,7 @@ public class HashTable2 {
 
     public boolean contains(int value) {
         int curPos = findPos(value);
-        return !arr[curPos].isDeleted;
+        return arr[curPos] != null && !arr[curPos].isDeleted;
     }
 
     public void insert(int value) {
@@ -70,7 +70,15 @@ public class HashTable2 {
     }
 
     private void rehash() {
+        HashEntry[] old = arr;
+        arr = new HashEntry[old.length * 2];
 
+        size = 0;
+        for (int i = 0; i < old.length; i++) {
+            if (old[i] != null && !old[i].isDeleted) {
+                insert(old[i].data);
+            }
+        }
     }
 
     public void traverse() {
@@ -98,7 +106,7 @@ public class HashTable2 {
     }
 
     public static void main(String[] args) {
-        HashTable2 table2 = new HashTable2(10);
+        HashTable2 table2 = new HashTable2(5);
         table2.insert(2);
         table2.insert(3);
         table2.insert(4);
